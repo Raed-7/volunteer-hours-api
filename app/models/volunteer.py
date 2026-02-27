@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import DateTime, String, Text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
 
@@ -16,5 +16,3 @@ class Volunteer(Base):
     phone: Mapped[str | None] = mapped_column(String(50), nullable=True)
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
-
-    attendances = relationship("Attendance", back_populates="volunteer", cascade="all, delete-orphan")

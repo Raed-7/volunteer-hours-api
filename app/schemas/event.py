@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date
 
 from pydantic import BaseModel
 
@@ -25,30 +25,5 @@ class EventUpdate(BaseModel):
 
 class EventRead(EventBase):
     id: int
-
-    model_config = {"from_attributes": True}
-
-
-class ShiftBase(BaseModel):
-    title: str
-    start_time: datetime
-    end_time: datetime
-    required_volunteers: int = 0
-
-
-class ShiftCreate(ShiftBase):
-    pass
-
-
-class ShiftUpdate(BaseModel):
-    title: str | None = None
-    start_time: datetime | None = None
-    end_time: datetime | None = None
-    required_volunteers: int | None = None
-
-
-class ShiftRead(ShiftBase):
-    id: int
-    event_id: int
 
     model_config = {"from_attributes": True}

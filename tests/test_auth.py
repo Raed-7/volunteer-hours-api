@@ -15,5 +15,9 @@ def test_auth_login_and_protected_requires_token(client: TestClient) -> None:
     assert login.status_code == 200
     token = login.json()["access_token"]
 
+    me = client.get("/auth/me", headers={"Authorization": f"Bearer {token}"})
+    assert me.status_code == 200
+    assert me.json()["email"] == "org@example.com"
+
     ok = client.get("/volunteers", headers={"Authorization": f"Bearer {token}"})
     assert ok.status_code == 200
